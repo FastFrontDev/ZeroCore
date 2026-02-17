@@ -1,0 +1,65 @@
+{
+  "name": "zerocore-wallet",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A secure cryptocurrency wallet application",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "dev:electron": "npm run build:electron && electron .",
+    "build": "tsc && vite build && npm run build:electron",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "preview": "vite preview",
+    "start": "npm run build && electron .",
+    "package": "npm run build && electron-builder"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "electron": "^40.4.1",
+    "electron-builder": "^26.7.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "@noble/secp256k1": "^2.1.0",
+    "bip32": "^5.0.0-rc.0",
+    "bip39": "^3.1.0",
+    "ethers": "^6.13.5",
+    "qrcode": "^1.5.4"
+  },
+  "overrides": {
+    "valibot": "1.2.0"
+  },
+  "build": {
+    "appId": "com.zerocore.wallet",
+    "productName": "ZeroCore Wallet",
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "public/icons/**/*",
+      "public/crypto-icons/**/*",
+      "public/fonts/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "public/icons/android-chrome-512x512.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "public/icons/android-chrome-512x512.png",
+      "category": "public.app-category.finance"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "public/icons/android-chrome-512x512.png",
+      "category": "Finance"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
